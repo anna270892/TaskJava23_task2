@@ -1,1 +1,1 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/qbidh7mlvrpy76ik?svg=true)](https://ci.appveyor.com/project/anna270892/TaskJava23_task2)
+[![Build status](https://ci.appveyor.com/api/projects/status/qbidh7mlvrpy76ik?svg=true)](https://ci.appveyor.com/project/anna270892/TaskJava23-task2)

@@ -1,3 +1,6 @@
+package org.example.registration.test;
+
+import org.example.registration.registrations.RegistrationDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
