@@ -19,9 +19,8 @@ public class AuthTest {
     @BeforeEach
     void setUp() {
         open("http://localhost:7777/");
-        dataGenerator = new RegistrationDataGenerator();
+        dataGenerator = new RegistrationDataGenerator(RegistrationDataGenerator.buildRequestSpec());
     }
-
     //успешный вход в личный кабинет
     @Test
     void activeRegisteredUser() {
