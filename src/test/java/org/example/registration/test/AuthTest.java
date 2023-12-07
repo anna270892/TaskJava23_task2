@@ -19,12 +19,12 @@ public class AuthTest {
     @BeforeEach
     void setUp() {
         open("http://localhost:7777/");
-        dataGenerator = new RegistrationDataGenerator(RegistrationDataGenerator.buildRequestSpec());
     }
-    //успешный вход в личный кабинет
+
+    // успешный вход в личный кабинет
     @Test
     void activeRegisteredUser() {
-        RegistrationDto registeredUser = dataGenerator.getRegisteredUser("active");
+        RegistrationDto registeredUser = RegistrationDataGenerator.getRegisteredUser(RegistrationDataGenerator.buildRequestSpec(), "active");
         $("[data-test-id='login'] input").setValue(registeredUser.getLogin());
         $("[data-test-id='password'] input").setValue(registeredUser.getPassword());
         $("button.button").click();
@@ -34,7 +34,7 @@ public class AuthTest {
     //не успешный вход в личный кабинет
     @Test
     void notActiveRegisteredUser() {
-        RegistrationDto notRegisteredUser = dataGenerator.getUser("active");
+        RegistrationDto notRegisteredUser = RegistrationDataGenerator.getUnregisteredUser("active");
         $("[data-test-id='login'] input").setValue(notRegisteredUser.getLogin());
         $("[data-test-id='password'] input").setValue(notRegisteredUser.getPassword());
         $("button.button").click();
@@ -45,7 +45,7 @@ public class AuthTest {
     //заблокированный пользователь
     @Test
     void ShouldGetErrorMessageIfLoginWithBlockedRegisteredUser() {
-        RegistrationDto blockedUser = dataGenerator.getRegisteredUser("blocked");
+        RegistrationDto blockedUser = RegistrationDataGenerator.getRegisteredUser(RegistrationDataGenerator.buildRequestSpec(), "blocked");
         $("[data-test-id='login'] input").setValue(blockedUser.getLogin());
         $("[data-test-id='password'] input").setValue(blockedUser.getPassword());
         $("button.button").click();
@@ -56,8 +56,8 @@ public class AuthTest {
     //невалидный логин
     @Test
     void notValidLogin() {
-        RegistrationDto registeredUser = dataGenerator.getRegisteredUser("active");
-        String wrongLogin = dataGenerator.getRandomLogin();
+        RegistrationDto registeredUser = RegistrationDataGenerator.getRegisteredUser(RegistrationDataGenerator.buildRequestSpec(), "active");
+        String wrongLogin = RegistrationDataGenerator.getRandomLogin();
         $("[data-test-id='login'] input").setValue(wrongLogin);
         $("[data-test-id='password'] input").setValue(registeredUser.getPassword());
         $("button.button").click();
@@ -68,7 +68,7 @@ public class AuthTest {
     //пустое поле "Логин"
     @Test
     void emptyFieldLogin() {
-        RegistrationDto registeredUser = dataGenerator.getRegisteredUser("active");
+        RegistrationDto registeredUser = RegistrationDataGenerator.getRegisteredUser(RegistrationDataGenerator.buildRequestSpec(), "active");
         $("[data-test-id='login'] input").clear();
         $("[data-test-id='password'] input").setValue(registeredUser.getPassword());
         $("button.button").click();
@@ -79,8 +79,8 @@ public class AuthTest {
     //невалидный пароль
     @Test
     void notValidPassword() {
-        RegistrationDto registeredUser = dataGenerator.getRegisteredUser("active");
-        String wrongPassword = dataGenerator.getRandomPassword();
+        RegistrationDto registeredUser = RegistrationDataGenerator.getRegisteredUser(RegistrationDataGenerator.buildRequestSpec(), "active");
+        String wrongPassword = RegistrationDataGenerator.getRandomPassword();
         $("[data-test-id='login'] input").setValue(registeredUser.getLogin());
         $("[data-test-id='password'] input").setValue(wrongPassword);
         $("button.button").click();
@@ -91,7 +91,7 @@ public class AuthTest {
     //пустое поле "Пароль"
     @Test
     void emptyFieldPassword() {
-        RegistrationDto registeredUser = dataGenerator.getRegisteredUser("active");
+        RegistrationDto registeredUser = RegistrationDataGenerator.getRegisteredUser(RegistrationDataGenerator.buildRequestSpec(), "active");
         $("[data-test-id='login'] input").setValue(registeredUser.getLogin());
         $("[data-test-id='password'] input").clear();
         $("button.button").click();
